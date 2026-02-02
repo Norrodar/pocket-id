@@ -27,6 +27,7 @@ type services struct {
 	userGroupService     *service.UserGroupService
 	ldapService          *service.LdapService
 	apiKeyService        *service.ApiKeyService
+	qrLoginService       *service.QrLoginService
 	versionService       *service.VersionService
 	fileStorage          storage.FileStorage
 	appLockService       *service.AppLockService
@@ -81,6 +82,7 @@ func initServices(ctx context.Context, db *gorm.DB, httpClient *http.Client, ima
 		return nil, fmt.Errorf("failed to create API key service: %w", err)
 	}
 
+	svc.qrLoginService = service.NewQrLoginService(db, svc.jwtService, svc.auditLogService)
 	svc.userSignUpService = service.NewUserSignupService(db, svc.jwtService, svc.auditLogService, svc.appConfigService, svc.userService)
 	svc.oneTimeAccessService = service.NewOneTimeAccessService(db, svc.userService, svc.jwtService, svc.auditLogService, svc.emailService, svc.appConfigService)
 

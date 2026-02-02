@@ -5,9 +5,20 @@
 	import * as Item from '$lib/components/ui/item/index.js';
 	import { m } from '$lib/paraglide/messages';
 	import appConfigStore from '$lib/stores/application-configuration-store';
-	import { LucideChevronRight, LucideMail, LucideRectangleEllipsis } from '@lucide/svelte';
+	import {
+		LucideChevronRight,
+		LucideMail,
+		LucideQrCode,
+		LucideRectangleEllipsis
+	} from '@lucide/svelte';
 
 	const methods = [
+		{
+			icon: LucideQrCode,
+			title: m.qr_code(),
+			description: m.scan_qr_code_to_sign_in(),
+			href: '/login/alternative/qr'
+		},
 		{
 			icon: LucideRectangleEllipsis,
 			title: m.login_code(),

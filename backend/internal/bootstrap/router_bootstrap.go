@@ -85,6 +85,7 @@ func initRouter(db *gorm.DB, svc *services) (utils.Service, error) {
 	controller.NewAuditLogController(apiGroup, svc.auditLogService, authMiddleware)
 	controller.NewUserGroupController(apiGroup, authMiddleware, svc.userGroupService)
 	controller.NewCustomClaimController(apiGroup, authMiddleware, svc.customClaimService)
+	controller.NewQrLoginController(apiGroup, authMiddleware, middleware.NewRateLimitMiddleware(), svc.qrLoginService, svc.appConfigService)
 	controller.NewVersionController(apiGroup, svc.versionService)
 	controller.NewScimController(apiGroup, authMiddleware, svc.scimService)
 	controller.NewUserSignupController(apiGroup, authMiddleware, middleware.NewRateLimitMiddleware(), svc.userSignUpService, svc.appConfigService)
